@@ -1,0 +1,205 @@
+{
+    "id": "manifestations",
+    "endpoint": {
+        "url": "http://localhost:9999/bigdata/namespace/integration/sparql?default-graph-uri=http://beltrans-manifestations&default-graph-uri=http://beltrans-contributors&default-graph-uri=http://master-data&named-graph-uri=http://beltrans-manifestations&named-graph-uri=http://beltrans-contributors",
+        "useAuth": true,
+        "prefixesFile": "SparqlQueriesPrefixes.js"
+    },
+    "graphs": [
+      "http://beltrans-manifestations",
+      "http://beltrans-contributors"
+    ],
+    "sparqlQueriesFile": "SparqlQueriesPerspective1.js",
+    "baseURI": "http://kbr.be/id/data",
+    "URITemplate": "<BASE_URI>/<LOCAL_ID>",
+    "facetClass": "schema:CreativeWork",
+    "frontPageImage": "main_page/works-452x262.jpg",
+    "searchMode": "faceted-search",
+    "enableDynamicLanguageChange": false,
+    "defaultActiveFacets": [
+        "prefLabel"
+    ],
+    "defaultTab": "table",
+    "defaultInstancePageTab": "table",
+    "resultClasses": {
+        "manifestations": {
+            "paginatedResultsConfig": {
+                "tabID": 0,
+                "component": "ResultTable",
+                "tabPath": "table",
+                "tabIcon": "CalendarViewDay",
+                "propertiesQueryBlock": "manifestationProperties",
+                "pagesize": 10,
+                "sortBy": null,
+                "sortDirection": null
+            },
+            "instanceConfig": {
+                "propertiesQueryBlock": "workProperties",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    },
+                    "instancePageExport": {
+                        "tabID": 1,
+                        "component": "Export",
+                        "tabPath": "export",
+                        "tabIcon": "CloudDownload",
+                        "pageType": "instancePage"
+                    }
+                }
+            }
+        },
+        "export": {
+            "tabID": 1,
+            "component": "Export",
+            "tabPath": "export",
+            "tabIcon": "CloudDownload",
+            "resultClass": "manifestations",
+            "facetClass": "manifestations"
+        },
+        "knowledgeGraphMetadata": {
+            "sparqlQuery": "knowledgeGraphMetadataQuery",
+            "resultMapper": "makeObjectList"
+        }
+    },
+    "properties": [
+        {
+            "id": "uri",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "beltransCorpus",
+            "valueType": "string",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 3
+        },
+        {
+            "id": "prefLabel",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        },
+        {
+            "id": "datePublished",
+            "valueType": "string",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10
+        },
+        {
+            "id": "sourceLang",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10
+        },
+        {
+            "id": "targetLang",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10
+        },
+        {
+            "id": "isbn13",
+            "valueType": "string",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 20
+        },
+        {
+            "id": "author",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 100
+        },
+        {
+            "id": "genre",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 50
+        } 
+    ],
+    "facets": {
+        "prefLabel": {
+            "sortByPredicate": "schema:name"
+        },
+        "beltransCorpus": {
+          "containerClass": "four",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "predicate": "schema:isPartOf",
+          "searchField": false,
+          "sortButton": false,
+          "sortBy": "instanceCount",
+          "sortDirection": "desc",
+          "pieChartButton": true
+        },
+        "targetLang": {
+          "containerClass": "four",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "mads:authoritativeLabel",
+          "facetLabelFilter": "FILTER(LANG(?prefLabel_) = 'en')",
+          "predicate": "schema:inLanguage",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "schema:inLanguage/mads:authoritativeLabel",
+          "sortDirection": "desc"
+        },
+        "author": {
+          "containerClass": "six",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "schema:name",
+          "predicate": "schema:author",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "schema:author/schema:name",
+          "sortDirection": "desc"
+        },
+        "genre": {
+          "containerClass": "six",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelFilter": "FILTER(LANG(?prefLabel_) = 'en')",
+          "predicate": "schema:about",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortDirection": "desc",
+          "pieChartButton": true
+        }
+
+    }
+}

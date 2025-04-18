@@ -1,5 +1,5 @@
 export const instanceQuery = `
-  SELECT * {
+  SELECT * WHERE {
     BIND(<ID> as ?id)
     <PROPERTIES>
     <RELATED_INSTANCES>
@@ -51,7 +51,8 @@ export const facetResultSetQuery = `
 `
 
 export const facetValuesQuery = `
-  SELECT DISTINCT ?id ?prefLabel ?selected ?parent ?instanceCount {
+  SELECT DISTINCT ?id ?prefLabel ?selected ?parent ?instanceCount 
+  WHERE {
     {
       {
         SELECT DISTINCT (count(DISTINCT ?instance) as ?instanceCount) ?id ?parent ?selected {
@@ -80,7 +81,8 @@ export const facetValuesQuery = `
 
 export const facetValuesQueryTimespan = `
   # ignore selections from other facets
-  SELECT ?min ?max {
+  SELECT ?min ?max 
+  WHERE {
     {
       SELECT (MIN(?start) AS ?min) {
         ?instance <PREDICATE> ?timespan .
@@ -104,7 +106,8 @@ export const facetValuesQueryTimespan = `
 
 export const facetValuesRange = `
   # ignore selections from other facets
-  SELECT (MIN(?value) AS ?min) (MAX(?value) AS ?max) {
+  SELECT (MIN(?value) AS ?min) (MAX(?value) AS ?max) 
+  WHERE {
     ?instance <PREDICATE> ?value .
     VALUES ?facetClass { <FACET_CLASS> }
     ?instance <FACET_CLASS_PREDICATE> ?facetClass .
@@ -125,7 +128,8 @@ export const sitemapInstancePageQuery = `
 // An optimized query for hierarchical facet that requires set maxHierarchyLevel in config
 // Note that this version can be faster in specific cases, but can also be slower in certain other cases
 export const hierarchicalFacetValuesQuery = `
-  SELECT DISTINCT ?id ?prefLabel ?selected ?parent ?instanceCount {
+  SELECT DISTINCT ?id ?prefLabel ?selected ?parent ?instanceCount 
+  WHERE {
     {
       {
         SELECT DISTINCT (count(DISTINCT ?instance) as ?instanceCount) ?id ?parent ?selected {

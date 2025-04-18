@@ -4,6 +4,7 @@ import querystring from 'querystring'
 export const runSelectQuery = async ({
   query,
   endpoint,
+  graphs = [],
   resultMapper,
   resultMapperConfig = null,
   postprocess = null,
@@ -21,6 +22,7 @@ export const runSelectQuery = async ({
   if (useAuth) {
     headers.Authorization = `Basic ${process.env.SPARQL_ENDPOINT_BASIC_AUTH}`
   }
+  console.log(query)
   const q = querystring.stringify({ query })
   try {
     const response = await axios({
@@ -41,6 +43,7 @@ export const runSelectQuery = async ({
         sparqlQuery: query
       }
     } else {
+
       return response.data
     }
   } catch (error) {
@@ -53,6 +56,7 @@ export const runSelectQuery = async ({
       console.log('\n')
     // console.log(error.response.headers);
     } else if (error.request) {
+      console.log('request made but no response, url correct?')
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
       // http.ClientRequest in node.js

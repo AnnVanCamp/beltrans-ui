@@ -1,22 +1,11 @@
 {
-    "portalID": "sampo",
+    "portalID": "beltrans",
     "rootUrl": "",
     "perspectives": {
         "searchPerspectives": [
-            "perspective1",
-            "perspective2",
-            "perspective3",
-            "perspective4",
-            "fullTextSearch"
+            "manifestations"
         ],
         "onlyInstancePages": [
-            "manuscripts",
-            "collections",
-            "works",
-            "expressions",
-            "events",
-            "actors",
-            "places"
         ]
     },
     "localeConfig": {
@@ -30,7 +19,7 @@
             },
             {
                 "id": "fi",
-                "label": "English",
+                "label": "Finish",
                 "filename": "localeFI.json"
             }
         ]
@@ -38,7 +27,7 @@
     "sitemapConfig": {
         "baseUrl": "https://sampo-ui.demo.seco.cs.aalto.fi",
         "langPrimary": "en",
-        "langSecondary": "fi",
+        "langSecondary": "nl",
         "outputDir": "./src/server/sitemap_generator",
         "sitemapUrl": "https://sampo-ui.demo.seco.cs.aalto.fi/sitemap",
         "sitemapInstancePageQuery": "sitemapInstancePageQuery"

@@ -1,7 +1,7 @@
 {
   "languageLabel": "English",
   "html": {
-    "title": "Sampo-UI – A framework for building user interfaces for semantic portals",
+    "title": "BELTRANS corpus",
     "description": "The Sampo-UI framework makes it possible to create highly customizable, user-friendly, and responsive user interfaces using current state-of-the-art JavaScript libraries and data from SPARQL endpoints."
   },
   "appTitle": {
@@ -304,10 +304,10 @@
         }
       }
     },
-    "perspective1": {
-      "label": "Perspective 1",
+    "manifestations": {
+      "label": "Manifestations",
       "facetResultsType": "works",
-      "shortDescription": "Perspective 1 description",
+      "shortDescription": "Manifestations description",
       "longDescription": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Use this perspective to access data related to Works. The MMM data model follows the <a href='https://www.ifla.org/publications/node/11240' target='_blank' rel='noopener noreferrer'>FRBRoo</a> definition of a work, which refers to “distinct concepts or combinations of concepts identified in artistic and intellectual expressions.” Works contain title and author information. If two or more source datasets include the same Work and this has been verified, the information from the source datasets has been merged into one Work. See <a href=\"/instructions\">instructions</a> for using the filters. The result view can be selected using the tabs: </p> <ul class=\"MuiTypography-root MuiTypography-body1\"> <li> <strong>TABLE</STRONG> view gives you a list of specific works, and the manuscripts and manuscript collections in which they can be found. </li> <li> <strong>EXPORT</strong> the SPARQL query used to generate the result table view into YASGUI query editor. </li> </ul>",
       "instancePage": {
         "label": "Work",
@@ -323,9 +323,33 @@
           "description": "The name or title of the Work.",
           "textFacetInputPlaceholder": "Search..."
         },
+        "datePublished": {
+          "label": "date published",
+          "description": "The date the manifestation was published"
+        },
+        "beltransCorpus": {
+          "label": "Part of subset",
+          "description": "Indicating if this manifestation is annotated as part of a specific subset."
+        },
+        "sourceLang": {
+          "label": "source language",
+          "description": "The language of the original"
+        },
+        "targetLang": {
+          "label": "target language",
+          "description": "The language of the translation"
+        },
+        "isbn13": {
+          "label": "ISBN-13",
+          "description": "The ISBN-13 of the translation"
+        },
         "author": {
-          "label": "Possible author",
-          "description": "The author(s) associated with the Work. Because of the structure of entries in the Schoenberg Database, the authors shown as being associated with a Work may actually be associated with other Works in the same manuscript instead."
+          "label": "author",
+          "description": "The author(s) associated with the manifestation, based on the MARC relator code 'aut'."
+        },
+        "genre": {
+          "label": "genre",
+          "description": "The genre of the manifestation according to the Belgian Bibliography."
         },
         "language": {
           "label": "Language",

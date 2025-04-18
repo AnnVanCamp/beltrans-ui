@@ -1,4 +1,7 @@
 export const prefixes = `
+  PREFIX bibo: <http://purl.org/ontology/bibo/>
+  PREFIX bf: <http://id.loc.gov/ontologies/bibframe/>
+  PREFIX btid: <http://kbr.be/id/data/> 
   PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -10,9 +13,11 @@ export const prefixes = `
   PREFIX dct: <http://purl.org/dc/terms/>
   PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
   PREFIX sch: <http://schema.org/>
+  PREFIX schema: <http://schema.org/>
   PREFIX geosparql: <http://www.opengis.net/ont/geosparql#>
   PREFIX frbroo: <http://erlangen-crm.org/efrbroo/>
   PREFIX mmm-schema: <http://ldf.fi/schema/mmm/>
+  PREFIX marcrel: <http://id.loc.gov/vocabulary/relators/> 
   PREFIX gvp: <http://vocab.getty.edu/ontology#>
   PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
   PREFIX spatial: <http://jena.apache.org/spatial#>
@@ -21,4 +26,6 @@ export const prefixes = `
   PREFIX h-schema: <http://ldf.fi/schema/hellerau/> 
   PREFIX gn: <http://www.geonames.org/ontology#>
   PREFIX semparls: <http://ldf.fi/schema/semparl/>
+  PREFIX prov: <http://www.w3.org/ns/prov#>
+  PREFIX mads: <http://www.loc.gov/mads/rdf/v1#>
 `

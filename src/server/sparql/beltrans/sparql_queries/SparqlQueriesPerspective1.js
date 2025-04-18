@@ -1,35 +1,71 @@
 const perspectiveID = 'perspective1'
 
-export const workProperties = `
+export const manifestationProperties = `
     {
-      ?id skos:prefLabel ?prefLabel__id .
+      graph <http://beltrans-manifestations> { ?id schema:name ?prefLabel__id . }
       BIND(?prefLabel__id AS ?prefLabel__prefLabel)
       BIND(CONCAT("/${perspectiveID}/page/", REPLACE(STR(?id), "^.*\\\\/(.+)", "$1")) AS ?prefLabel__dataProviderUrl)
       BIND(?id as ?uri__id)
       BIND(?id as ?uri__dataProviderUrl)
       BIND(?id as ?uri__prefLabel)
     }
+    #
+    # datePublished
+    #
     UNION
     {
-      ?id ^mmm-schema:manuscript_work ?manuscript__id .
-      ?manuscript__id skos:prefLabel ?manuscript__prefLabel .
-      BIND(CONCAT("/manuscripts/page/", REPLACE(STR(?manuscript__id), "^.*\\\\/(.+)", "$1")) AS ?manuscript__dataProviderUrl)
+      graph <http://beltrans-manifestations> { ?id schema:datePublished ?datePublished . }
     }
+    #
+    # sourceLang
+    #
     UNION
     {
-      ?id  ^mmm-schema:manuscript_work/crm:P46i_forms_part_of ?collection__id .
-      ?collection__id skos:prefLabel ?collection__prefLabel .
-      BIND(CONCAT("/collections/page/", ENCODE_FOR_URI(REPLACE(STR(?collection__id), "^.*\\\\/(.+)", "$1"))) AS ?collection__dataProviderUrl)
+      graph <http://beltrans-manifestations> { ?id schema:translationOfWork ?original . }
+      graph <http://beltrans-originals> { ?original schema:inLanguage ?sourceLang__id . }
+      graph <http://master-data> { ?sourceLang__id mads:authoritativeLabel ?sourceLang__prefLabel . }
+      FILTER(LANG(?sourceLang__prefLabel) = 'en')
     }
+    #
+    # targetLang
+    #
     UNION
     {
-      ?id ^mmm-schema:manuscript_work/crm:P45_consists_of ?material__id .
-      ?material__id skos:prefLabel ?material__prefLabel .
+      graph <http://beltrans-manifestations> { ?id schema:inLanguage ?targetLang__id . }
+      graph <http://master-data> { ?targetLang__id mads:authoritativeLabel ?targetLang__prefLabel . }
+      FILTER(LANG(?targetLang__prefLabel) = 'en')
     }
+    #
+    # subset
+    #
     UNION
     {
-      ?id dct:source ?source__id .
-      ?source__id skos:prefLabel ?source__prefLabel .
+      graph <http://beltrans-manifestations> { ?id schema:isPartOf btid:beltransCorpus . }
+      BIND(IF(EXISTS{?id schema:isPartOf btid:beltransCorpus}, 'Yes', 'No') AS ?beltransCorpus)
+    }
+    #
+    # ISBN-13
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id bibo:isbn13 ?isbn13 . }
+    }
+    #
+    # author
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id schema:author ?author__id . }
+      graph <http://beltrans-contributors> { ?author__id schema:name ?author__prefLabel . }
+    }
+    #
+    # genre
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id schema:about ?genre__id . }
+      graph <http://master-data> { ?genre__id skos:prefLabel ?genre__prefLabel . }
+      FILTER(LANG(?genre__prefLabel) = 'en')
     }
     UNION
     {
