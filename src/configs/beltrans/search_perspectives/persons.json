@@ -1,0 +1,493 @@
+{
+    "id": "persons",
+    "endpoint": {
+        "url": "http://localhost:9999/bigdata/namespace/integration/sparql?default-graph-uri=http://beltrans-manifestations&default-graph-uri=http://beltrans-contributors&default-graph-uri=http://master-data&named-graph-uri=http://beltrans-manifestations&named-graph-uri=http://beltrans-contributors",
+        "useAuth": true,
+        "prefixesFile": "SparqlQueriesPrefixes.js"
+    },
+    "sparqlQueriesFile": "SparqlQueriesPerspective2.js",
+    "baseURI": "http://kbr.be/id/data",
+    "URITemplate": "<BASE_URI>/<LOCAL_ID>",
+    "facetClass": "schema:Person",
+    "frontPageImage": "main_page/manuscripts-452x262.jpg",
+    "searchMode": "faceted-search",
+    "enableDynamicLanguageChange": false,
+    "defaultActiveFacets": [],
+    "defaultTab": "table",
+    "defaultInstancePageTab": "table",
+    "includeInSitemap": true,
+    "resultClasses": {
+        "persons": {
+            "paginatedResultsConfig": {
+                "tabID": 0,
+                "component": "ResultTable",
+                "tabPath": "table",
+                "tabIcon": "CalendarViewDay",
+                "propertiesQueryBlock": "personProperties",
+                "paginatedResultsAlwaysExpandRows": false,
+                "paginatedResultsRowContentMaxHeight": 190,
+                "pagesize": 10,
+                "sortBy": null,
+                "sortDirection": null
+            },
+            "instanceConfig": {
+                "propertiesQueryBlock": "personProperties",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    },
+                    "manuscriptInstancePageNetwork": {
+                        "tabID": 1,
+                        "component": "Network",
+                        "tabPath": "network",
+                        "tabIcon": "BubbleChart",
+                        "pageType": "instancePage",
+                        "sparqlQuery": "manuscriptInstancePageNetworkLinksQuery",
+                        "sparqlQueryNodes": "manuscriptNetworkNodesQuery",
+                        "useNetworkAPI": true,
+                        "limit": 200,
+                        "optimize": 1.2,
+                        "preprocess": "preprocessPageRank",
+                        "style": [
+                            {
+                                "selector": "node",
+                                "style": {
+                                    "shape": "ellipse",
+                                    "label": "data(prefLabel)"
+                                }
+                            },
+                            {
+                                "selector": "edge",
+                                "style": {
+                                    "curve-style": "bezier",
+                                    "target-arrow-shape": "triangle",
+                                    "target-arrow-color": "#999",
+                                    "color": "#555",
+                                    "font-size": "6",
+                                    "text-valign": "top",
+                                    "text-halign": "center",
+                                    "edge-text-rotation": "autorotate",
+                                    "text-background-opacity": 1,
+                                    "text-background-color": "white",
+                                    "text-background-shape": "roundrectangle"
+                                }
+                            }
+                        ],
+                        "layout": {
+                            "name": "cose",
+                            "idealEdgeLength": 100,
+                            "nodeOverlap": 20,
+                            "refresh": 20,
+                            "fit": true,
+                            "padding": 30,
+                            "randomize": false,
+                            "componentSpacing": 100,
+                            "nodeRepulsion": 400000,
+                            "edgeElasticity": 100,
+                            "nestingFactor": 5,
+                            "gravity": 80,
+                            "numIter": 1347,
+                            "initialTemp": 200,
+                            "coolingFactor": 0.95,
+                            "minTemp": 1
+                        }
+                    },
+                    "instancePageExport": {
+                        "tabID": 2,
+                        "component": "Export",
+                        "tabPath": "export",
+                        "tabIcon": "CloudDownload",
+                        "pageType": "instancePage"
+                    }
+                }
+            }
+        },
+        "placesMsProduced": {
+            "tabID": 1,
+            "component": "LeafletMap",
+            "tabPath": "production_places",
+            "tabIcon": "AddLocation",
+            "sparqlQuery": "productionPlacesQuery",
+            "facetClass": "perspective2",
+            "filterTarget": "manuscripts",
+            "resultMapper": "mapPlaces",
+            "facetID": "productionPlace",
+            "showExternalLayers": true,
+            "instanceConfig": {
+                "propertiesQueryBlock": "placePropertiesInfoWindow",
+                "relatedInstances": "manuscriptsProducedAt",
+                "filterTarget": "related__id",
+                "createPopUpContent": "createPopUpContentMMM"
+            }
+        },
+        "placesMsProducedHeatmap": {
+            "tabID": 2,
+            "component": "Deck",
+            "tabPath": "production_places_heatmap",
+            "tabIcon": "AddLocation",
+            "sparqlQuery": "productionPlacesQuery",
+            "facetClass": "perspective2",
+            "filterTarget": "manuscripts",
+            "resultMapper": "mapPlaces",
+            "layerType": "heatmapLayer",
+            "heatmapRadiusPixels": 40,
+            "heatmapThreshold": 0.025,
+            "heatmapIntensity": 1
+        },
+        "lastKnownLocations": {
+            "tabID": 5,
+            "component": "LeafletMap",
+            "tabPath": "last_known_locations",
+            "tabIcon": "LocationOn",
+            "sparqlQuery": "lastKnownLocationsQuery",
+            "facetClass": "perspective2",
+            "filterTarget": "manuscripts",
+            "resultMapper": "mapPlaces",
+            "facetID": "lastKnownLocation",
+            "instanceConfig": {
+                "propertiesQueryBlock": "placePropertiesInfoWindow",
+                "relatedInstances": "lastKnownLocationsAt"
+            }
+        },
+        "placesMsMigrations": {
+            "tabID": 6,
+            "component": "Deck",
+            "tabPath": "migrations",
+            "tabIcon": "Redo",
+            "sparqlQuery": "migrationsQuery",
+            "facetClass": "perspective2",
+            "filterTarget": "manuscript",
+            "resultMapper": "makeObjectList",
+            "layerType": "arcLayer",
+            "arcWidthVariable": "instanceCountScaled",
+            "instanceVariable": "manuscript",
+            "showTooltips": true,
+            "postprocess": {
+                "func": "linearScale",
+                "config": {
+                    "variable": "instanceCount",
+                    "minAllowed": 3,
+                    "maxAllowed": 30
+                }
+            }
+        },
+        "placesMsMigrationsDialog": {
+            "sparqlQuery": "migrationsDialogQuery",
+            "filterTarget": "id",
+            "resultMapper": "makeObjectList"
+        },
+        "productionTimespanLineChart": {
+            "tabID": 3,
+            "component": "ApexChartsDouble",
+            "tabPath": "production_dates",
+            "tabIcon": "ShowChart",
+            "upperResultClass": "productionTimespanLineChartUpper",
+            "lowerResultClass": "productionTimespanLineChartLower",
+            "resultClasses": {
+                "productionTimespanLineChartUpper": {
+                    "height": "70%",
+                    "sparqlQuery": "productionsByDecadeQuery",
+                    "facetClass": "perspective2",
+                    "filterTarget": "instance",
+                    "resultMapper": "mapLineChart",
+                    "resultMapperConfig": {
+                        "fillEmptyValues": false
+                    },
+                    "createChartData": "createSingleLineChartData",
+                    "title": "Manuscript production by decade",
+                    "xaxisTitle": "Decade",
+                    "xaxisType": "category",
+                    "xaxisTickAmount": 30,
+                    "yaxisTitle": "Manuscript count",
+                    "seriesTitle": "Manuscript count",
+                    "stroke": {
+                        "width": 2
+                    }
+                },
+                "productionTimespanLineChartLower": {
+                    "height": "30%",
+                    "sparqlQuery": "productionsByDecadeQueryLower",
+                    "facetClass": "perspective2",
+                    "filterTarget": "instance",
+                    "resultMapper": "mapLineChart",
+                    "resultMapperConfig": {
+                        "fillEmptyValues": false
+                    },
+                    "createChartData": "createSingleLineChartData",
+                    "title": "Manuscript production by decade",
+                    "xaxisTitle": "Decade",
+                    "xaxisType": "category",
+                    "xaxisTickAmount": 30,
+                    "yaxisTitle": "Manuscript count",
+                    "seriesTitle": "Manuscript count",
+                    "stroke": {
+                        "width": 2
+                    }
+                }
+            }
+        },
+        "productionsByDecadeAndCountry": {
+            "sparqlQuery": "productionsByDecadeAndCountryQuery",
+            "facetClass": "perspective2",
+            "filterTarget": "manuscript",
+            "resultMapper": "makeObjectList",
+            "postprocess": {
+                "func": "toBarChartRaceFormat",
+                "config": {
+                    "step": 10
+                }
+            }
+        },
+        "eventLineChart": {
+            "tabID": 4,
+            "component": "ApexCharts",
+            "tabPath": "event_dates",
+            "tabIcon": "ShowChart",
+            "sparqlQuery": "eventsByDecadeQuery",
+            "facetClass": "perspective2",
+            "filterTarget": "manuscript",
+            "resultMapper": "mapMultipleLineChart",
+            "resultMapperConfig": {
+                "fillEmptyValues": false
+            },
+            "createChartData": "createMultipleLineChartData",
+            "title": "Manuscript events by decade",
+            "xaxisTitle": "Decade",
+            "xaxisType": "category",
+            "xaxisTickAmount": 30,
+            "yaxisTitle": "Count",
+            "seriesTitle": "Count",
+            "stroke": {
+                "curve": "straight",
+                "width": 2
+            },
+            "fill": {
+                "type": "gradient",
+                "gradient": {
+                    "shadeIntensity": 1,
+                    "inverseColors": false,
+                    "opacityFrom": 0.6,
+                    "opacityTo": 0.05,
+                    "stops": [
+                        20,
+                        60,
+                        100,
+                        100
+                    ]
+                }
+            }
+        },
+        "manuscriptFacetResultsNetwork": {
+            "tabID": 7,
+            "component": "Network",
+            "tabPath": "network",
+            "tabIcon": "BubbleChart",
+            "sparqlQuery": "manuscriptFacetResultsNetworkLinksQuery",
+            "facetClass": "perspective2",
+            "sparqlQueryNodes": "manuscriptNetworkNodesQuery",
+            "filterTarget": "manuscript",
+            "useNetworkAPI": true,
+            "limit": 500,
+            "optimize": 1.2,
+            "preprocess": "preprocessPageRank",
+            "style": [
+                {
+                    "selector": "node",
+                    "style": {
+                        "shape": "ellipse",
+                        "label": "data(prefLabel)"
+                    }
+                },
+                {
+                    "selector": "edge",
+                    "style": {
+                        "curve-style": "bezier",
+                        "target-arrow-shape": "triangle",
+                        "target-arrow-color": "#999",
+                        "color": "#555",
+                        "font-size": "6",
+                        "text-valign": "top",
+                        "text-halign": "center",
+                        "edge-text-rotation": "autorotate",
+                        "text-background-opacity": 1,
+                        "text-background-color": "white",
+                        "text-background-shape": "roundrectangle"
+                    }
+                }
+            ],
+            "layout": {
+                "name": "cose",
+                "idealEdgeLength": 100,
+                "nodeOverlap": 20,
+                "refresh": 20,
+                "fit": true,
+                "padding": 30,
+                "randomize": false,
+                "componentSpacing": 100,
+                "nodeRepulsion": 400000,
+                "edgeElasticity": 100,
+                "nestingFactor": 5,
+                "gravity": 80,
+                "numIter": 1347,
+                "initialTemp": 200,
+                "coolingFactor": 0.95,
+                "minTemp": 1
+            }
+        },
+        "export": {
+            "tabID": 8,
+            "component": "Export",
+            "tabPath": "export",
+            "tabIcon": "CloudDownload",
+            "resultClass": "perspective2",
+            "facetClass": "perspective2"
+        },
+        "jenaText": {
+            "propertiesQueryBlock": "fullTextSearchProperties"
+        }
+    },
+    "maps": {
+        "placesMsProduced": {
+            "center": [
+                22.43,
+                10.37
+            ],
+            "zoom": 2
+        },
+        "placesMsProducedHeatmap": {
+            "center": [
+                22.43,
+                10.37
+            ],
+            "zoom": 2
+        },
+        "lastKnownLocations": {
+            "center": [
+                22.43,
+                10.37
+            ],
+            "zoom": 2
+        },
+        "placesMsMigrations": {
+            "center": [
+                22.43,
+                10.37
+            ],
+            "zoom": 2
+        },
+        "casualtiesByMunicipality": {
+            "center": [
+                65.184809,
+                27.31405
+            ],
+            "zoom": 4
+        }
+    },
+    "properties": [
+        {
+            "id": "uri",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "prefLabel",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "familyName",
+            "valueType": "string",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "givenName",
+            "valueType": "string",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200,
+            "collapsedMaxWords": 3,
+            "priority": 5
+        },
+        {
+            "id": "birthDate",
+            "valueType": "string",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 180,
+            "collapsedMaxWords": 3,
+            "priority": 5
+        },
+        {
+            "id": "deathDate",
+            "valueType": "string",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "showSource": true,
+            "sourceExternalLink": true,
+            "minWidth": 150
+        }
+    ],
+    "facets": {
+        "prefLabel": {
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "sortByPredicate": "skos:prefLabel",
+            "textQueryProperty": "skos:prefLabel"
+        },
+        "miniatures": {
+            "containerClass": "five",
+            "facetType": "integer",
+            "filterType": "integerFilterRange",
+            "predicate": "mmm-schema:miniatures/crm:P90_has_value",
+            "sortByPredicate": "mmm-schema:miniatures/crm:P90_has_value",
+            "unit": ""
+        },
+        "decoratedInitials": {
+            "containerClass": "five",
+            "facetType": "integer",
+            "filterType": "integerFilterRange",
+            "predicate": "mmm-schema:decorated_initials/crm:P90_has_value",
+            "sortByPredicate": "mmm-schema:decorated_initials/crm:P90_has_value",
+            "unit": ""
+        },
+        "historiatedInitials": {
+            "containerClass": "five",
+            "facetType": "integer",
+            "filterType": "integerFilterRange",
+            "predicate": "mmm-schema:historiated_initials/crm:P90_has_value",
+            "sortByPredicate": "mmm-schema:historiated_initials/crm:P90_has_value",
+            "unit": ""
+        },
+        "source": {
+            "containerClass": "three",
+            "filterType": "uriFilter",
+            "pieChartButton": true,
+            "predicate": "dct:source",
+            "sortBy": "instanceCount",
+            "sortByPredicate": "dct:source/skos:prefLabel",
+            "sortDirection": "desc"
+        }
+    }
+}

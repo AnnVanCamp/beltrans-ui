@@ -1,4 +1,4 @@
-const perspectiveID = 'perspective1'
+const perspectiveID = 'manifestations'
 
 export const manifestationProperties = `
     {

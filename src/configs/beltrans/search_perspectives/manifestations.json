@@ -5,14 +5,10 @@
         "useAuth": true,
         "prefixesFile": "SparqlQueriesPrefixes.js"
     },
-    "graphs": [
-      "http://beltrans-manifestations",
-      "http://beltrans-contributors"
-    ],
     "sparqlQueriesFile": "SparqlQueriesPerspective1.js",
     "baseURI": "http://kbr.be/id/data",
     "URITemplate": "<BASE_URI>/<LOCAL_ID>",
-    "facetClass": "schema:CreativeWork",
+    "facetClass": "btm:BeltransGenreTranslation",
     "frontPageImage": "main_page/works-452x262.jpg",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
@@ -34,7 +30,7 @@
                 "sortDirection": null
             },
             "instanceConfig": {
-                "propertiesQueryBlock": "workProperties",
+                "propertiesQueryBlock": "manifestationProperties",
                 "instancePageResultClasses": {
                     "instancePageTable": {
                         "tabID": 0,
@@ -74,15 +70,6 @@
             "sortValues": true,
             "numberedList": false,
             "onlyOnInstancePage": true
-        },
-        {
-            "id": "beltransCorpus",
-            "valueType": "string",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 3
         },
         {
             "id": "prefLabel",
@@ -151,17 +138,6 @@
     "facets": {
         "prefLabel": {
             "sortByPredicate": "schema:name"
-        },
-        "beltransCorpus": {
-          "containerClass": "four",
-          "facetType": "list",
-          "filterType": "uriFilter",
-          "predicate": "schema:isPartOf",
-          "searchField": false,
-          "sortButton": false,
-          "sortBy": "instanceCount",
-          "sortDirection": "desc",
-          "pieChartButton": true
         },
         "targetLang": {
           "containerClass": "four",
