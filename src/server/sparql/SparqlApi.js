@@ -1,5 +1,7 @@
 import axios from 'axios'
 import querystring from 'querystring'
+import dotenv from 'dotenv'
+dotenv.config()
 
 export const runSelectQuery = async ({
   query,
@@ -22,7 +24,6 @@ export const runSelectQuery = async ({
   if (useAuth) {
     headers.Authorization = `Basic ${process.env.SPARQL_ENDPOINT_BASIC_AUTH}`
   }
-  console.log(query)
   const q = querystring.stringify({ query })
   try {
     const response = await axios({

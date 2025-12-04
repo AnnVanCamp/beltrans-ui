@@ -3,7 +3,9 @@
     "rootUrl": "",
     "perspectives": {
         "searchPerspectives": [
-            "manifestations"
+            "manifestations",
+            "persons",
+            "organizations"
         ],
         "onlyInstancePages": [
         ]

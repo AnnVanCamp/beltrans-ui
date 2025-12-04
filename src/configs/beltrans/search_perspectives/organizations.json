@@ -1,14 +1,14 @@
 {
-    "id": "persons",
+    "id": "organizations",
     "endpoint": {
-        "url": "http://beltrans2.kbr.be/sparql/namespace/integration/sparql?default-graph-uri=http://beltrans-manifestations&default-graph-uri=http://beltrans-contributors&default-graph-uri=http://master-data&named-graph-uri=http://beltrans-manifestations&named-graph-uri=http://beltrans-contributors",
+        "url": "http://beltrans2.kbr.be/sparql/namespace/integration/sparql?default-graph-uri=http://beltrans-manifestations&default-graph-uri=http://beltrans-contributors&default-graph-uri=http://master-data&named-graph-uri=http://beltrans-manifestations&named-graph-uri=http://beltrans-contributors&default-graph-uri=http://beltrans-geo",
         "useAuth": true,
         "prefixesFile": "SparqlQueriesPrefixes.js"
     },
-    "sparqlQueriesFile": "SparqlQueriesPerspective2.js",
+    "sparqlQueriesFile": "SparqlQueriesPerspective3.js",
     "baseURI": "http://kbr.be/id/data",
     "URITemplate": "<BASE_URI>/<LOCAL_ID>",
-    "facetClass": "schema:Person",
+    "facetClass": "schema:Organization",
     "frontPageImage": "main_page/manuscripts-452x262.jpg",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
@@ -19,13 +19,13 @@
     "defaultInstancePageTab": "table",
     "includeInSitemap": true,
     "resultClasses": {
-        "persons": {
+        "organizations": {
             "paginatedResultsConfig": {
                 "tabID": 0,
                 "component": "ResultTable",
                 "tabPath": "table",
                 "tabIcon": "CalendarViewDay",
-                "propertiesQueryBlock": "personProperties",
+                "propertiesQueryBlock": "organizationProperties",
                 "paginatedResultsAlwaysExpandRows": false,
                 "paginatedResultsRowContentMaxHeight": 190,
                 "pagesize": 50,
@@ -33,7 +33,7 @@
                 "sortDirection": null
             },
             "instanceConfig": {
-                "propertiesQueryBlock": "personProperties",
+                "propertiesQueryBlock": "organizationProperties",
                 "instancePageResultClasses": {
                     "instancePageTable": {
                         "tabID": 0,
@@ -56,8 +56,8 @@
             "component": "Export",
             "tabPath": "export",
             "tabIcon": "CloudDownload",
-            "resultClass": "persons",
-            "facetClass": "persons"
+            "resultClass": "organizations",
+            "facetClass": "organizations"
         },
         "jenaText": {
             "propertiesQueryBlock": "fullTextSearchProperties"
@@ -101,17 +101,8 @@
             "minWidth": 20
         },
         {
-            "id": "familyName",
-            "valueType": "string",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 150
-        },
-        {
-            "id": "givenName",
-            "valueType": "string",
+            "id": "location",
+            "valueType": "object",
             "makeLink": false,
             "externalLink": false,
             "sortValues": true,
@@ -121,93 +112,71 @@
             "priority": 5
         },
         {
-            "id": "birthDate",
-            "valueType": "string",
+            "id": "country",
+            "valueType": "object",
             "makeLink": false,
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 15,
+            "minWidth": 20,
             "collapsedMaxWords": 3,
             "priority": 5
         },
         {
-            "id": "deathDate",
+            "id": "region",
             "valueType": "string",
             "makeLink": false,
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "showSource": true,
-            "sourceExternalLink": true,
-            "minWidth": 15
-        },
-        {
-            "id": "gender",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "showSource": true,
-            "sourceExternalLink": true,
-            "minWidth": 10
-        },
-        {
-            "id": "nationality",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "showSource": true,
-            "sourceExternalLink": true,
-            "minWidth": 10
+            "minWidth": 20,
+            "collapsedMaxWords": 3,
+            "priority": 5
         }
+
     ],
     "facets": {
         "prefLabel": {
             "sortByPredicate": "schema:name"
         },
-        "nationality": {
+        "location": {
             "containerClass": "five",
             "facetType": "list",
-            "filterType": "uriFilter",
-            "facetLabelPredicate": "skos:prefLabel",
-            "predicate": "schema:nationality",
-            "facetLabelFilter": "FILTER(LANG(?prefLabel_) = 'en')",
-            "sortByPredicate": "schema:nationality/skos:prefLabel",
-            "searchField": true,
-            "sortButton": true,
-            "sortBy": "instanceCount",
-            "sortDirection": "desc",
-            "pieChartButton": true
-        },
-        "gender": {
-            "containerClass": "five",
-            "facetType": "list",
-            "filterType": "uriFilter",
-            "predicate": "schema:gender",
+            "filterType": "textFilter",
             "facetLabelPredicate": "rdfs:label",
-            "facetLabelFilter": "FILTER(LANG(?prefLabel_) = 'en')",
-            "sortByPredicate": "schema:gender/rdfs:label",
+            "predicate": "schema:addressLocality",
+            "sortByPredicate": "schema:addressLocality/rdfs:label",
             "searchField": true,
             "sortButton": true,
             "sortBy": "instanceCount",
             "sortDirection": "desc",
             "pieChartButton": true
         },
-        "birthDate": {
+        "country": {
             "containerClass": "five",
-            "facetType": "timespan",
-            "filterType": "dateFilter",
-            "predicate": "schema:birthDate"
+            "facetType": "list",
+            "filterType": "textFilter",
+            "predicate": "schema:addressLocality",
+            "facetLabelPredicate": "rdfs:comment",
+            "sortByPredicate": "schema:addressLocality/rdfs:comment",
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortDirection": "desc",
+            "pieChartButton": true
         },
-        "deathDate": {
+        "region": {
             "containerClass": "five",
-            "facetType": "timespan",
-            "filterType": "dateFilter",
-            "predicate": "schema:deathDate"
+            "facetType": "list",
+            "filterType": "textFilter",
+            "predicate": "schema:addressRegion",
+            "facetLabelPredicate": "schema:addressRegion",
+            "sortByPredicate": "schema:addressRegion",
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortDirection": "desc",
+            "pieChartButton": true
         } 
     }
 }

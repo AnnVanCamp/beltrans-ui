@@ -1,7 +1,7 @@
 {
     "id": "manifestations",
     "endpoint": {
-        "url": "http://localhost:9999/bigdata/namespace/integration/sparql?default-graph-uri=http://beltrans-manifestations&default-graph-uri=http://beltrans-contributors&default-graph-uri=http://master-data&named-graph-uri=http://beltrans-manifestations&named-graph-uri=http://beltrans-contributors",
+        "url": "http://beltrans2.kbr.be/sparql/namespace/integration/sparql?default-graph-uri=http://beltrans-manifestations&default-graph-uri=http://beltrans-contributors&default-graph-uri=http://master-data&default-graph-uri=http://beltrans-originals&named-graph-uri=http://beltrans-manifestations&named-graph-uri=http://beltrans-contributors",
         "useAuth": true,
         "prefixesFile": "SparqlQueriesPrefixes.js"
     },
@@ -49,7 +49,7 @@
             }
         },
         "export": {
-            "tabID": 1,
+            "tabID": 8,
             "component": "Export",
             "tabPath": "export",
             "tabIcon": "CloudDownload",
@@ -70,7 +70,7 @@
             "sortValues": true,
             "numberedList": false,
             "onlyOnInstancePage": true
-        },
+        }, 
         {
             "id": "prefLabel",
             "valueType": "object",
@@ -81,7 +81,16 @@
             "minWidth": 250
         },
         {
-            "id": "datePublished",
+            "id": "genre",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 50
+        },
+        {
+            "id": "targetYearOfPublication",
             "valueType": "string",
             "makeLink": false,
             "externalLink": false,
@@ -126,14 +135,60 @@
             "minWidth": 100
         },
         {
-            "id": "genre",
+            "id": "translator",
             "valueType": "object",
             "makeLink": true,
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
             "minWidth": 50
-        } 
+        },
+        {
+            "id": "illustrator",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 50
+        },
+        {
+            "id": "scenarist",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 50
+        },
+        {
+            "id": "publishingDirector",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 50
+        },
+        {
+            "id": "targetPublisher",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 50
+        },
+        {
+            "id": "sourcePublisher",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 50
+        }
+        
     ],
     "facets": {
         "prefLabel": {
@@ -153,7 +208,7 @@
           "sortDirection": "desc"
         },
         "author": {
-          "containerClass": "six",
+          "containerClass": "ten",
           "facetType": "list",
           "filterType": "uriFilter",
           "facetLabelPredicate": "schema:name",
@@ -162,6 +217,78 @@
           "sortButton": true,
           "sortBy": "instanceCount",
           "sortByPredicate": "schema:author/schema:name",
+          "sortDirection": "desc"
+        },
+        "translator": {
+          "containerClass": "ten",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "schema:name",
+          "predicate": "schema:translator",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "schema:translator/schema:name",
+          "sortDirection": "desc"
+        },
+        "illustrator": {
+          "containerClass": "ten",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "schema:name",
+          "predicate": "marcrel:ill",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "marcrel:ill/schema:name",
+          "sortDirection": "desc"
+        },
+        "scenarist": {
+          "containerClass": "ten",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "schema:name",
+          "predicate": "marcrel:sce",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "marcrel:sce/schema:name",
+          "sortDirection": "desc"
+        },
+        "publishingDirector": {
+          "containerClass": "ten",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "schema:name",
+          "predicate": "marcrel:pbd",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "marcrel:pbd/schema:name",
+          "sortDirection": "desc"
+        },
+        "targetPublisher": {
+          "containerClass": "ten",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "schema:name",
+          "predicate": "marcrel:pbl",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "marcrel:pbl/schema:name",
+          "sortDirection": "desc"
+        },
+        "sourcePublisher": {
+          "containerClass": "ten",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "schema:name",
+          "predicate": "schema:translationOfWork/marcrel:pbl",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "schema:translationOfWork/marcrel:pbl/schema:name",
           "sortDirection": "desc"
         },
         "genre": {

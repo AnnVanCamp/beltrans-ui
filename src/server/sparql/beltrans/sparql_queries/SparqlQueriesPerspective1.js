@@ -1,4 +1,6 @@
 const perspectiveID = 'manifestations'
+const personsPerspectiveID = 'persons'
+const orgsPerspectiveID = 'organizations'
 
 export const manifestationProperties = `
     {
@@ -10,11 +12,11 @@ export const manifestationProperties = `
       BIND(?id as ?uri__prefLabel)
     }
     #
-    # datePublished
+    # targetYearOfPublication
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id schema:datePublished ?datePublished . }
+      graph <http://beltrans-manifestations> { ?id schema:datePublished ?targetYearOfPublication . }
     }
     #
     # sourceLang
@@ -36,14 +38,6 @@ export const manifestationProperties = `
       FILTER(LANG(?targetLang__prefLabel) = 'en')
     }
     #
-    # subset
-    #
-    UNION
-    {
-      graph <http://beltrans-manifestations> { ?id schema:isPartOf btid:beltransCorpus . }
-      BIND(IF(EXISTS{?id schema:isPartOf btid:beltransCorpus}, 'Yes', 'No') AS ?beltransCorpus)
-    }
-    #
     # ISBN-13
     #
     UNION
@@ -56,8 +50,92 @@ export const manifestationProperties = `
     UNION
     {
       graph <http://beltrans-manifestations> { ?id schema:author ?author__id . }
-      graph <http://beltrans-contributors> { ?author__id schema:name ?author__prefLabel . }
+      graph <http://beltrans-contributors> { 
+        ?author__id schema:name ?author__prefLabel ;
+                    dcterms:identifier ?authorID .
+      }
+      BIND(CONCAT("/${personsPerspectiveID}/page/", REPLACE(STR(?authorID), "^.*\\\\/(.+)", "$1")) AS ?author__dataProviderUrl)
     }
+
+    #
+    # translator
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id schema:translator ?translator__id . }
+      graph <http://beltrans-contributors> { 
+        ?translator__id schema:name ?translator__prefLabel ;
+                        dcterms:identifier ?translatorID .
+      }
+      BIND(CONCAT("/${personsPerspectiveID}/page/", REPLACE(STR(?translatorID), "^.*\\\\/(.+)", "$1")) AS ?translator__dataProviderUrl)
+    }
+
+    #
+    # illustrator
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id marcrel:ill ?illustrator__id . }
+      graph <http://beltrans-contributors> { 
+        ?illustrator__id schema:name ?illustrator__prefLabel ;
+                         dcterms:identifier ?illustratorID .
+      }
+      BIND(CONCAT("/${personsPerspectiveID}/page/", REPLACE(STR(?illustratorID), "^.*\\\\/(.+)", "$1")) AS ?illustrator__dataProviderUrl)
+    }
+
+    #
+    # scenarist
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id marcrel:sce ?scenarist__id . }
+      graph <http://beltrans-contributors> { 
+        ?scenarist__id schema:name ?scenarist__prefLabel ;
+                       dcterms:identifier ?scenaristID .
+      }
+      BIND(CONCAT("/${personsPerspectiveID}/page/", REPLACE(STR(?scenaristID), "^.*\\\\/(.+)", "$1")) AS ?scenarist__dataProviderUrl)
+    }
+
+    #
+    # publishing director
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id marcrel:pbd ?publishingDirector__id . }
+      graph <http://beltrans-contributors> { 
+        ?publishingDirector__id schema:name ?publishingDirector__prefLabel ;
+                                dcterms:identifier ?publishingDirectorID .
+      }
+      BIND(CONCAT("/${personsPerspectiveID}/page/", REPLACE(STR(?publishingDirectorID), "^.*\\\\/(.+)", "$1")) AS ?publishingDirector__dataProviderUrl)
+    }
+
+    #
+    # target publisher
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id marcrel:pbl ?targetPublisher__id . }
+      graph <http://beltrans-contributors> {
+        ?targetPublisher__id schema:name ?targetPublisher__prefLabel ;
+                             dcterms:identifier ?targetPublisherID .
+      }
+      BIND(CONCAT("/${orgsPerspectiveID}/page/", REPLACE(STR(?targetPublisherID), "^.*\\\\/(.+)", "$1")) AS ?targetPublisher__dataProviderUrl)
+    }
+
+    #
+    # source publisher
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id schema:translationOfWork ?originalID . }
+      graph <http://beltrans-originals> { ?originalID marcrel:pbl ?sourcePublisher__id . }
+      graph <http://beltrans-contributors> {
+        ?sourcePublisher__id schema:name ?sourcePublisher__prefLabel ;
+                             dcterms:identifier ?sourcePublisherID .
+      }
+      BIND(CONCAT("/${orgsPerspectiveID}/page/", REPLACE(STR(?sourcePublisherID), "^.*\\\\/(.+)", "$1")) AS ?sourcePublisher__dataProviderUrl)
+    }
+
     #
     # genre
     #
@@ -67,33 +145,7 @@ export const manifestationProperties = `
       graph <http://master-data> { ?genre__id skos:prefLabel ?genre__prefLabel . }
       FILTER(LANG(?genre__prefLabel) = 'en')
     }
-    UNION
-    {
-      ?id ^frbroo:R16_initiated/(mmm-schema:carried_out_by_as_possible_author|mmm-schema:carried_out_by_as_author) ?author__id .
-      ?author__id skos:prefLabel ?author__prefLabel .
-      BIND(CONCAT("/actors/page/", REPLACE(STR(?author__id), "^.*\\\\/(.+)", "$1")) AS ?author__dataProviderUrl)
-    }
-    UNION
-    {
-      ?id ^frbroo:R19_created_a_realisation_of/frbroo:R17_created ?expression__id .
-      ?expression__id skos:prefLabel ?expression__prefLabel .
-      OPTIONAL {
-        ?expression__id crm:P72_has_language ?language__id .
-        ?expression__id dct:source ?language__source__id .
-        ?language__source__id skos:prefLabel ?language__source__prefLabel .
-        ?language__id skos:prefLabel ?language__prefLabel .
-      }
-      BIND(CONCAT("/expressions/page/", REPLACE(STR(?expression__id), "^.*\\\\/(.+)", "$1")) AS ?expression__dataProviderUrl)
-    }
-    UNION
-    {
-      ?id ^mmm-schema:manuscript_work/^crm:P108_has_produced/crm:P4_has_time-span ?productionTimespan__id .
-      ?productionTimespan__id skos:prefLabel ?productionTimespan__prefLabel .
-      ?productionTimespan__id dct:source ?productionTimespan__source__id .
-      ?productionTimespan__source__id skos:prefLabel ?productionTimespan__source__prefLabel .
-      OPTIONAL { ?productionTimespan__id crm:P82a_begin_of_the_begin ?productionTimespan__start }
-      OPTIONAL { ?productionTimespan__id crm:P82b_end_of_the_end ?productionTimespan__end }
-    }
+    
 `
 
 export const knowledgeGraphMetadataQuery = `
