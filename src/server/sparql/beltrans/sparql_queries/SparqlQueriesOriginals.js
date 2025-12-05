@@ -1,12 +1,12 @@
-const perspectiveID = 'manifestations'
+const perspectiveID = 'originals'
 const personsPerspectiveID = 'persons'
 const orgsPerspectiveID = 'organizations'
-const originalsPerspectiveID = 'originals'
+const manifestationsPerspectiveID = 'manifestations'
 const workClustersPerspectiveID = 'workClusters'
 
-export const manifestationProperties = `
+export const originalProperties = `
     {
-      graph <http://beltrans-manifestations> { ?id schema:name ?prefLabel__id . }
+      graph <http://beltrans-originals> { ?id schema:name ?prefLabel__id . }
       BIND(?prefLabel__id AS ?prefLabel__prefLabel)
       BIND(CONCAT("/${perspectiveID}/page/", REPLACE(STR(?id), "^.*\\\\/(.+)", "$1")) AS ?prefLabel__dataProviderUrl)
       BIND(?id as ?uri__id)
@@ -18,15 +18,14 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id schema:datePublished ?targetYearOfPublication . }
+      graph <http://beltrans-originals> { ?id schema:datePublished ?datePublished . }
     }
     #
     # sourceLang
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id schema:translationOfWork ?original . }
-      graph <http://beltrans-originals> { ?original schema:inLanguage ?sourceLang__id . }
+      graph <http://beltrans-originals> { ?id schema:inLanguage ?sourceLang__id . }
       graph <http://master-data> { ?sourceLang__id mads:authoritativeLabel ?sourceLang__prefLabel . }
       FILTER(LANG(?sourceLang__prefLabel) = 'en')
     }
@@ -35,7 +34,8 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id schema:inLanguage ?targetLang__id . }
+      graph <http://beltrans-originals> { ?id schema:workTranslation ?translation . }
+      graph <http://beltrans-manifestations> { ?translation schema:inLanguage ?targetLang__id . }
       graph <http://master-data> { ?targetLang__id mads:authoritativeLabel ?targetLang__prefLabel . }
       FILTER(LANG(?targetLang__prefLabel) = 'en')
     }
@@ -44,14 +44,14 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id bibo:isbn13 ?isbn13 . }
+      graph <http://beltrans-originals> { ?id bibo:isbn13 ?isbn13 . }
     }
     #
     # author
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id schema:author ?author__id . }
+      graph <http://beltrans-originals> { ?id schema:author ?author__id . }
       graph <http://beltrans-contributors> { 
         ?author__id schema:name ?author__prefLabel ;
                     dcterms:identifier ?authorID .
@@ -64,7 +64,7 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id schema:translator ?translator__id . }
+      graph <http://beltrans-originals> { ?id schema:translator ?translator__id . }
       graph <http://beltrans-contributors> { 
         ?translator__id schema:name ?translator__prefLabel ;
                         dcterms:identifier ?translatorID .
@@ -77,7 +77,7 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id marcrel:ill ?illustrator__id . }
+      graph <http://beltrans-originals> { ?id marcrel:ill ?illustrator__id . }
       graph <http://beltrans-contributors> { 
         ?illustrator__id schema:name ?illustrator__prefLabel ;
                          dcterms:identifier ?illustratorID .
@@ -90,7 +90,7 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id marcrel:sce ?scenarist__id . }
+      graph <http://beltrans-originals> { ?id marcrel:sce ?scenarist__id . }
       graph <http://beltrans-contributors> { 
         ?scenarist__id schema:name ?scenarist__prefLabel ;
                        dcterms:identifier ?scenaristID .
@@ -103,7 +103,7 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id marcrel:pbd ?publishingDirector__id . }
+      graph <http://beltrans-originals> { ?id marcrel:pbd ?publishingDirector__id . }
       graph <http://beltrans-contributors> { 
         ?publishingDirector__id schema:name ?publishingDirector__prefLabel ;
                                 dcterms:identifier ?publishingDirectorID .
@@ -116,7 +116,7 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id marcrel:pbl ?targetPublisher__id . }
+      graph <http://beltrans-originals> { ?id marcrel:pbl ?targetPublisher__id . }
       graph <http://beltrans-contributors> {
         ?targetPublisher__id schema:name ?targetPublisher__prefLabel ;
                              dcterms:identifier ?targetPublisherID .
@@ -125,16 +125,16 @@ export const manifestationProperties = `
     }
 
     #
-    # source title
+    # translation
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id schema:translationOfWork ?original__id . }
-      graph <http://beltrans-originals> { 
-        ?original__id schema:name ?original__prefLabel ;
-                      dcterms:identifier ?originalID .
+      graph <http://beltrans-originals> { ?id schema:workTranslation ?translation__id . }
+      graph <http://beltrans-manifestations> { 
+        ?translation__id schema:name ?translation__prefLabel ;
+                        dcterms:identifier ?translationID .
       }
-      BIND(CONCAT("/${originalsPerspectiveID}/page/", REPLACE(STR(?originalID), "^.*\\\\/(.+)", "$1")) AS ?original__dataProviderUrl) 
+      BIND(CONCAT("/${manifestationsPerspectiveID}/page/", REPLACE(STR(?translationID), "^.*\\\\/(.+)", "$1")) AS ?translation__dataProviderUrl) 
     }
     #
     # source publisher

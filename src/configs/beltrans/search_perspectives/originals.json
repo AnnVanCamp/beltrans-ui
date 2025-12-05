@@ -1,14 +1,14 @@
 {
-    "id": "manifestations",
+    "id": "originals",
     "endpoint": {
         "url": "http://beltrans2.kbr.be/sparql/namespace/integration/sparql?default-graph-uri=http://beltrans-manifestations&default-graph-uri=http://beltrans-contributors&default-graph-uri=http://master-data&default-graph-uri=http://beltrans-originals&named-graph-uri=http://beltrans-manifestations&named-graph-uri=http://beltrans-contributors",
         "useAuth": true,
         "prefixesFile": "SparqlQueriesPrefixes.js"
     },
-    "sparqlQueriesFile": "SparqlQueriesPerspective1.js",
+    "sparqlQueriesFile": "SparqlQueriesOriginals.js",
     "baseURI": "http://kbr.be/id/data",
     "URITemplate": "<BASE_URI>/<LOCAL_ID>",
-    "facetClass": "btm:BeltransGenreTranslation",
+    "facetClass": "btm:BeltransOriginal",
     "frontPageImage": "main_page/works-452x262.jpg",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
@@ -18,19 +18,19 @@
     "defaultTab": "table",
     "defaultInstancePageTab": "table",
     "resultClasses": {
-        "manifestations": {
+        "originals": {
             "paginatedResultsConfig": {
                 "tabID": 0,
                 "component": "ResultTable",
                 "tabPath": "table",
                 "tabIcon": "CalendarViewDay",
-                "propertiesQueryBlock": "manifestationProperties",
+                "propertiesQueryBlock": "originalProperties",
                 "pagesize": 10,
                 "sortBy": null,
                 "sortDirection": null
             },
             "instanceConfig": {
-                "propertiesQueryBlock": "manifestationProperties",
+                "propertiesQueryBlock": "originalProperties",
                 "instancePageResultClasses": {
                     "instancePageTable": {
                         "tabID": 0,
@@ -53,8 +53,8 @@
             "component": "Export",
             "tabPath": "export",
             "tabIcon": "CloudDownload",
-            "resultClass": "manifestations",
-            "facetClass": "manifestations"
+            "resultClass": "originals",
+            "facetClass": "originals"
         },
         "knowledgeGraphMetadata": {
             "sparqlQuery": "knowledgeGraphMetadataQuery",
@@ -90,7 +90,7 @@
             "minWidth": 50
         },
         {
-            "id": "targetYearOfPublication",
+            "id": "datePublished",
             "valueType": "string",
             "makeLink": false,
             "externalLink": false,
@@ -135,15 +135,6 @@
             "minWidth": 100
         },
         {
-            "id": "translator",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 50
-        },
-        {
             "id": "illustrator",
             "valueType": "object",
             "makeLink": true,
@@ -171,22 +162,13 @@
             "minWidth": 50
         },
         {
-            "id": "targetPublisher",
+            "id": "translation",
             "valueType": "object",
             "makeLink": true,
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
             "minWidth": 50
-        },
-        {
-            "id": "original",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 100
         },
         {
             "id": "sourcePublisher",
@@ -227,18 +209,6 @@
           "sortButton": true,
           "sortBy": "instanceCount",
           "sortByPredicate": "schema:author/schema:name",
-          "sortDirection": "desc"
-        },
-        "translator": {
-          "containerClass": "ten",
-          "facetType": "list",
-          "filterType": "uriFilter",
-          "facetLabelPredicate": "schema:name",
-          "predicate": "schema:translator",
-          "searchField": true,
-          "sortButton": true,
-          "sortBy": "instanceCount",
-          "sortByPredicate": "schema:translator/schema:name",
           "sortDirection": "desc"
         },
         "illustrator": {
@@ -289,29 +259,16 @@
           "sortByPredicate": "marcrel:pbl/schema:name",
           "sortDirection": "desc"
         },
-        "original": {
-          "containerClass": "ten",
-          "facetType": "list",
-          "filterType": "uriFilter",
-          "facetLabelPredicate": "schema:name",
-          "predicate": "schema:translationOfWork",
-          "searchField": true,
-          "sortButton": true,
-          "sortBy": "instanceCount",
-          "sortByPredicate": "schema:translationOfWork/schema:name",
-          "sortDirection": "desc"
-        },
-
         "sourcePublisher": {
           "containerClass": "ten",
           "facetType": "list",
           "filterType": "uriFilter",
           "facetLabelPredicate": "schema:name",
-          "predicate": "schema:translationOfWork/marcrel:pbl",
+          "predicate": "marcrel:pbl",
           "searchField": true,
           "sortButton": true,
           "sortBy": "instanceCount",
-          "sortByPredicate": "schema:translationOfWork/marcrel:pbl/schema:name",
+          "sortByPredicate": "marcrel:pbl/schema:name",
           "sortDirection": "desc"
         },
         "genre": {

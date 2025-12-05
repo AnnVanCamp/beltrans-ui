@@ -5,7 +5,8 @@
         "searchPerspectives": [
             "manifestations",
             "persons",
-            "organizations"
+            "organizations",
+            "originals"
         ],
         "onlyInstancePages": [
         ]

@@ -242,6 +242,30 @@
         "deathDate": {
           "label": "Death Date",
           "description": "The date of death of the person."
+        },
+        "authorOf": {
+          "label": "author of",
+          "description": "A translation where this person contributed as author (MARC21 relator code 'aut')"
+        },
+        "translatorOf": {
+          "label": "translator of",
+          "description": "A translation where this person contributed as translator (MARC21 relator code 'trl')"
+        },
+        "scenaristOf": {
+          "label": "scenarist of",
+          "description": "A translation where this person contributed as scenarist (MARC21 relator code 'sce')"
+        },
+        "illustratorOf": {
+          "label": "illustrator of",
+          "description": "A translation where this person contributed as illustrator (MARC21 relator code 'ill')"
+        },
+        "publishingDirectorOf": {
+          "label": "publishing director of",
+          "description": "A translation where this person contributed as publishing director (MARC21 relator code 'pbd')"
+        },
+        "numberContributions": {
+          "label": "number of contributions",
+          "description": "The number of translations in which this person contributed in any of the following roles: author, translator, scenarist, illustrator, publishing director"
         }
       }
     },
@@ -306,13 +330,9 @@
           "description": "The name or title of the Work.",
           "textFacetInputPlaceholder": "Search..."
         },
-        "datePublished": {
+        "targetYearOfPublication": {
           "label": "date published",
           "description": "The date the manifestation was published"
-        },
-        "beltransCorpus": {
-          "label": "Part of subset",
-          "description": "Indicating if this manifestation is annotated as part of a specific subset."
         },
         "sourceLang": {
           "label": "source language",
@@ -350,6 +370,10 @@
           "label": "targetPublisher",
           "description": "The publisher associated with the manifestation, based on the MARC relator code 'pbl'."
         },
+        "original": {
+          "label": "original",
+          "description": "The original of this translation."
+        },
         "sourcePublisher": {
           "label": "sourcePublisher",
           "description": "The publisher associated with the source of the manifestation, based on the MARC relator code 'pbl' of the linked source."
@@ -357,6 +381,79 @@
         "genre": {
           "label": "genre",
           "description": "The genre of the manifestation according to the Belgian Bibliography."
+        }
+      }
+    },
+    "originals": {
+      "label": "Originals",
+      "facetResultsType": "originals",
+      "shortDescription": "Originals of the BELTRANS corpus",
+      "longDescription": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Use this perspective to access data related to Works. The MMM data model follows the <a href='https://www.ifla.org/publications/node/11240' target='_blank' rel='noopener noreferrer'>FRBRoo</a> definition of a work, which refers to “distinct concepts or combinations of concepts identified in artistic and intellectual expressions.” Works contain title and author information. If two or more source datasets include the same Work and this has been verified, the information from the source datasets has been merged into one Work. See <a href=\"/instructions\">instructions</a> for using the filters. The result view can be selected using the tabs: </p> <ul class=\"MuiTypography-root MuiTypography-body1\"> <li> <strong>TABLE</STRONG> view gives you a list of specific works, and the manuscripts and manuscript collections in which they can be found. </li> <li> <strong>EXPORT</strong> the SPARQL query used to generate the result table view into YASGUI query editor. </li> </ul>",
+      "instancePage": {
+        "label": "Original",
+        "description": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> The MMM data model follows the <a href='https://www.ifla.org/publications/node/11240' target='_blank' rel='noopener noreferrer'>FRBRoo</a> definition of a work, which refers to “distinct concepts or combinations of concepts identified in artistic and intellectual expressions.” Works contain title and author information. This definition is not shared by the Bibale or Oxford Libraries’ conception of the term, which both define their internal “work” concept more closely to the FRBRoo conception of an Expression. The SDBM does not have a work concept at all, recording only the titles of the texts as given in its various sources, without normalizing that data or linking it directly to author information. Works were generated within the MMM dataset by manually creating links across the three datasets’ various conceptions of the relationship between authors and their creations. This process was not able to reconcile every work contained within the combined dataset. </p>"
+      },
+      "properties": {
+        "uri": {
+          "label": "URI",
+          "description": "Uniform Resource Identifier"
+        },
+        "prefLabel": {
+          "label": "Title",
+          "description": "The name or title of the Work.",
+          "textFacetInputPlaceholder": "Search..."
+        },
+        "targetYearOfPublication": {
+          "label": "date published",
+          "description": "The date the original was published"
+        },
+        "sourceLang": {
+          "label": "source language",
+          "description": "The language of the original"
+        },
+        "targetLang": {
+          "label": "target language",
+          "description": "The language of the translation(s)"
+        },
+        "isbn13": {
+          "label": "ISBN-13",
+          "description": "The ISBN-13 of the translation(s)"
+        },
+        "author": {
+          "label": "author",
+          "description": "The author(s) associated with the original, based on the MARC relator code 'aut'."
+        },
+        "translator": {
+          "label": "translator",
+          "description": "The translator(s) associated with the original, based on the MARC relator code 'trl'."
+        },
+        "illustrator": {
+          "label": "illustrator",
+          "description": "The illustrator(s) associated with the original, based on the MARC relator code 'ill'."
+        },
+        "scenarist": {
+          "label": "scenarist",
+          "description": "The scenarist(s) associated with the original, based on the MARC relator code 'sce'."
+        },
+        "publishingDirector": {
+          "label": "publishingDirector",
+          "description": "The publishing director(s) associated with the original, based on the MARC relator code 'pbd'."
+        },
+        "targetPublisher": {
+          "label": "targetPublisher",
+          "description": "The publisher associated with the original, based on the MARC relator code 'pbl'."
+        },
+        "translation": {
+          "label": "translation",
+          "description": "The translation(s) of this original."
+        },
+        "sourcePublisher": {
+          "label": "sourcePublisher",
+          "description": "The publisher associated with this original, based on the MARC relator code 'pbl' of the linked source."
+        },
+        "genre": {
+          "label": "genre",
+          "description": "The genre of this original according to the Belgian Bibliography."
         }
       }
     },

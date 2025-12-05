@@ -163,6 +163,71 @@
             "showSource": true,
             "sourceExternalLink": true,
             "minWidth": 10
+        },
+        {
+            "id": "authorOf",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "showSource": true,
+            "minWidth": 10,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "translatorOf",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "showSource": true,
+            "minWidth": 10,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "scenaristOf",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "showSource": true,
+            "minWidth": 10,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "illustratorOf",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "showSource": true,
+            "minWidth": 10,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "publishingDirectorOf",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "showSource": true,
+            "minWidth": 10,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "numberContributions",
+            "valueType": "string",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "showSource": true,
+            "minWidth": 10
         }
     ],
     "facets": {
@@ -208,6 +273,6 @@
             "facetType": "timespan",
             "filterType": "dateFilter",
             "predicate": "schema:deathDate"
-        } 
+        }
     }
 }

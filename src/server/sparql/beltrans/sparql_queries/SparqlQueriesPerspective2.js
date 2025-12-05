@@ -1,4 +1,5 @@
 const perspectiveID = 'persons'
+const manifestationsPerspectiveID = 'manifestations'
 
 export const personProperties = `
     {
@@ -82,6 +83,71 @@ export const personProperties = `
     UNION
     {
       graph <http://beltrans-contributors> { ?id schema:deathDate ?deathDate . }
+    }
+
+    #
+    # authorOf
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { 
+        ?authorOf__id marcrel:aut ?id ;
+           dcterms:identifier ?mID ;
+           schema:name ?authorOf__prefLabel .
+      }
+      BIND(CONCAT("/${manifestationsPerspectiveID}/page/", REPLACE(STR(?mID), "^.*\\\\/(.+)", "$1")) AS ?authorOf__dataProviderUrl)
+    }
+
+    #
+    # translatorOf
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { 
+        ?translatorOf__id marcrel:trl ?id ;
+           dcterms:identifier ?mID ;
+           schema:name ?translatorOf__prefLabel .
+      }
+      BIND(CONCAT("/${manifestationsPerspectiveID}/page/", REPLACE(STR(?mID), "^.*\\\\/(.+)", "$1")) AS ?translatorOf__dataProviderUrl)
+    }
+
+    #
+    # scenaristOf
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { 
+        ?scenaristOf__id marcrel:sce ?id ;
+           dcterms:identifier ?mID ;
+           schema:name ?scenaristOf__prefLabel .
+      }
+      BIND(CONCAT("/${manifestationsPerspectiveID}/page/", REPLACE(STR(?mID), "^.*\\\\/(.+)", "$1")) AS ?scenaristOf__dataProviderUrl)
+    }
+
+    #
+    # illustratorOf
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { 
+        ?illustratorOf__id marcrel:ill ?id ;
+           dcterms:identifier ?mID ;
+           schema:name ?illustratorOf__prefLabel .
+      }
+      BIND(CONCAT("/${manifestationsPerspectiveID}/page/", REPLACE(STR(?mID), "^.*\\\\/(.+)", "$1")) AS ?illustratorOf__dataProviderUrl)
+    }
+
+    #
+    # publishingDirectorOf
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { 
+        ?publishingDirectorOf__id marcrel:pbd ?id ;
+           dcterms:identifier ?mID ;
+           schema:name ?publishingDirectorOf__prefLabel .
+      }
+      BIND(CONCAT("/${manifestationsPerspectiveID}/page/", REPLACE(STR(?mID), "^.*\\\\/(.+)", "$1")) AS ?publishingDirector__dataProviderUrl)
     }
     
 `
