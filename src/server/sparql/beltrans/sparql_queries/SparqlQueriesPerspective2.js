@@ -17,7 +17,7 @@ export const personProperties = `
       graph <http://beltrans-contributors> { 
         ?id bf:identifiedBy ?isniEntity .
 
-        ?isniEntity a bf:Identifier ;
+        ?isniEntity a bf:Isni ;
                     rdfs:label "ISNI" ;
                     rdf:value ?isni__prefLabel . 
       }

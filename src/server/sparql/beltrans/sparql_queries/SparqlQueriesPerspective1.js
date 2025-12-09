@@ -132,9 +132,9 @@ export const manifestationProperties = `
       graph <http://beltrans-manifestations> { ?id schema:translationOfWork ?original__id . }
       graph <http://beltrans-originals> { 
         ?original__id schema:name ?original__prefLabel ;
-                      dcterms:identifier ?originalID .
+                      dcterms:identifier ?sourceID .
       }
-      BIND(CONCAT("/${originalsPerspectiveID}/page/", REPLACE(STR(?originalID), "^.*\\\\/(.+)", "$1")) AS ?original__dataProviderUrl) 
+      BIND(CONCAT("/${originalsPerspectiveID}/page/", REPLACE(STR(?sourceID), "^.*\\\\/(.+)", "$1")) AS ?original__dataProviderUrl) 
     }
     #
     # source publisher

@@ -8,7 +8,7 @@
     "sparqlQueriesFile": "SparqlQueriesPerspective1.js",
     "baseURI": "http://kbr.be/id/data",
     "URITemplate": "<BASE_URI>/<LOCAL_ID>",
-    "facetClass": "btm:BeltransGenreTranslation",
+    "facetClass": "btm:BeltransTranslation",
     "frontPageImage": "main_page/works-452x262.jpg",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
