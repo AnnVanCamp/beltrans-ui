@@ -5,8 +5,8 @@
         "searchPerspectives": [
             "manifestations",
             "persons",
-            "organizations",
-            "originals"
+            "originals",
+            "organizations"
         ],
         "onlyInstancePages": [
         ]
@@ -19,11 +19,6 @@
                 "id": "en",
                 "label": "English",
                 "filename": "localeEN.json"
-            },
-            {
-                "id": "fi",
-                "label": "Finish",
-                "filename": "localeFI.json"
             }
         ]
     },
@@ -54,7 +49,7 @@
         "paginationToolbarHeight": 37,
         "tableFontSize": "0.8rem",
         "topBar": {
-            "logoImage": "logos/logo.png",
+            "logoImage": "logos/beltrans-logo.png",
             "logoTextTransform": "none",
             "hideLogoTextOnMobile": true,
             "showLanguageButton": true,
@@ -79,7 +74,7 @@
             ]
         },
         "mainPage": {
-            "bannerImage": "main_page/mmm-banner.jpg",
+            "bannerImage": "main_page/brecht-evens-bib.jpg",
             "bannerBackround": "linear-gradient( rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45) ), url(<BANNER_IMAGE_URL)",
             "bannerMobileHeight": 150,
             "bannerReducedHeight": 220,
