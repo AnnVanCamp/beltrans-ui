@@ -5,6 +5,10 @@ import Box from '@mui/material/Box'
 import aaltoLogo from '../../../img/logos/Aalto_SCI_EN_13_BLACK_2_cropped.png'
 import hyLogo from '../../../img/logos/university-of-helsinki-logo-transparent-black.png'
 import heldigLogo from '../../../img/logos/heldig-logo-transparent-black.png'
+import logoKBR from '../../../img/logos/logo-kbr.png' 
+import logoKUL from '../../../img/logos/logo-kul.png'
+import logoUCL from '../../../img/logos/logo-ucl.png' 
+import logoBELSPO from '../../../img/logos/logo-belspo.png'
 
 /**
  * A component for creating a footer. The logos are imported inside this component.
@@ -36,7 +40,7 @@ const Footer = props => {
     >
       <Box
         component='a'
-        href='https://www.aalto.fi/en/school-of-science'
+        href='https://www.kbr.be/en/'
         target='_blank'
         rel='noopener noreferrer'
         sx={theme => ({
@@ -50,8 +54,8 @@ const Footer = props => {
       >
         <Box
           component='img'
-          src={aaltoLogo}
-          alt='Aalto University logo'
+          src={logoKBR}
+          alt='Royal Library of Belgium (KBR) logo'
           sx={{
             height: '100%'
           }}
@@ -59,7 +63,7 @@ const Footer = props => {
       </Box>
       <Box
         component='a'
-        href='https://www.helsinki.fi/en'
+        href='https://www.kuleuven.be/english/kuleuven/'
         target='_blank'
         rel='noopener noreferrer'
         sx={theme => ({
@@ -73,8 +77,8 @@ const Footer = props => {
       >
         <Box
           component='img'
-          src={hyLogo}
-          alt='University of Helsinki logo'
+          src={logoKUL}
+          alt='KU Leuven logo'
           sx={{
             height: '100%'
           }}
@@ -82,7 +86,7 @@ const Footer = props => {
       </Box>
       <Box
         component='a'
-        href='https://www.helsinki.fi/en/helsinki-centre-for-digital-humanities'
+        href='https://www.uclouvain.be/en'
         target='_blank'
         rel='noopener noreferrer'
         sx={theme => ({
@@ -96,13 +100,37 @@ const Footer = props => {
       >
         <Box
           component='img'
-          src={heldigLogo}
-          alt='Helsinki Centre for Digital Humanities logo'
+          src={logoUCL}
+          alt='UCLouvain logo'
           sx={{
             height: '100%'
           }}
         />
       </Box>
+      <Box
+        component='a'
+        href='https://www.belspo.be/'
+        target='_blank'
+        rel='noopener noreferrer'
+        sx={theme => ({
+          width: 118,
+          height: 30,
+          [theme.breakpoints.up(props.layoutConfig.reducedHeightBreakpoint)]: {
+            width: 130,
+            height: 33
+          }
+        })}
+      >
+        <Box
+          component='img'
+          src={logoBELSPO}
+          alt='BELSPO logo'
+          sx={{
+            height: '100%'
+          }}
+        />
+      </Box>
+
     </Paper>
   )
 }
