@@ -8,8 +8,8 @@
     "sparqlQueriesFile": "SparqlQueriesPerspective1.js",
     "baseURI": "http://kbr.be/id/data",
     "URITemplate": "<BASE_URI>/<LOCAL_ID>",
-    "facetClass": "btm:BeltransTranslation",
-    "frontPageImage": "main_page/works-452x262.jpg",
+    "facetClass": "btm:BeltransGenreTranslation",
+    "frontPageImage": "main_page/brecht-evens-bib.jpg",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
     "defaultActiveFacets": [
@@ -153,16 +153,7 @@
             "minWidth": 50
         },
         {
-            "id": "scenarist",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 50
-        },
-        {
-            "id": "publishingDirector",
+            "id": "editor",
             "valueType": "object",
             "makeLink": true,
             "externalLink": false,
@@ -222,11 +213,11 @@
           "facetType": "list",
           "filterType": "uriFilter",
           "facetLabelPredicate": "schema:name",
-          "predicate": "schema:author",
+          "predicate": "schema:author|marcrel:sce",
           "searchField": true,
           "sortButton": true,
           "sortBy": "instanceCount",
-          "sortByPredicate": "schema:author/schema:name",
+          "sortByPredicate": "(schema:author|marcrel:sce)/schema:name",
           "sortDirection": "desc"
         },
         "translator": {
@@ -234,11 +225,11 @@
           "facetType": "list",
           "filterType": "uriFilter",
           "facetLabelPredicate": "schema:name",
-          "predicate": "schema:translator",
+          "predicate": "schema:translator|marcrel:adp",
           "searchField": true,
           "sortButton": true,
           "sortBy": "instanceCount",
-          "sortByPredicate": "schema:translator/schema:name",
+          "sortByPredicate": "(schema:translator|marcrel:adp)/schema:name",
           "sortDirection": "desc"
         },
         "illustrator": {
@@ -253,19 +244,7 @@
           "sortByPredicate": "marcrel:ill/schema:name",
           "sortDirection": "desc"
         },
-        "scenarist": {
-          "containerClass": "ten",
-          "facetType": "list",
-          "filterType": "uriFilter",
-          "facetLabelPredicate": "schema:name",
-          "predicate": "marcrel:sce",
-          "searchField": true,
-          "sortButton": true,
-          "sortBy": "instanceCount",
-          "sortByPredicate": "marcrel:sce/schema:name",
-          "sortDirection": "desc"
-        },
-        "publishingDirector": {
+        "editor": {
           "containerClass": "ten",
           "facetType": "list",
           "filterType": "uriFilter",

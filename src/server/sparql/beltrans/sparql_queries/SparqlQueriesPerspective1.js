@@ -103,12 +103,12 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id marcrel:pbd ?publishingDirector__id . }
+      graph <http://beltrans-manifestations> { ?id marcrel:pbd ?editor__id . }
       graph <http://beltrans-contributors> { 
-        ?publishingDirector__id schema:name ?publishingDirector__prefLabel ;
-                                dcterms:identifier ?publishingDirectorID .
+        ?editor__id schema:name ?editor__prefLabel ;
+                                dcterms:identifier ?editorID .
       }
-      BIND(CONCAT("/${personsPerspectiveID}/page/", REPLACE(STR(?publishingDirectorID), "^.*\\\\/(.+)", "$1")) AS ?publishingDirector__dataProviderUrl)
+      BIND(CONCAT("/${personsPerspectiveID}/page/", REPLACE(STR(?editorID), "^.*\\\\/(.+)", "$1")) AS ?editor__dataProviderUrl)
     }
 
     #
