@@ -161,6 +161,46 @@ export const manifestationProperties = `
     }
 
     #
+    # female author
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id btm:hasFemaleAuthor ?femaleAuthor__id . }
+      graph <http://master-data> { ?femaleAuthor__id skos:prefLabel ?femaleAuthor__prefLabel . }
+      FILTER(LANG(?femaleAuthor__prefLabel) = 'en')
+    }
+
+    #
+    # female translator
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id btm:hasFemaleTranslator ?femaleTranslator__id . }
+      graph <http://master-data> { ?femaleTranslator__id skos:prefLabel ?femaleTranslator__prefLabel . }
+      FILTER(LANG(?femaleTranslator__prefLabel) = 'en')
+    }
+
+    #
+    # female illustrator
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id btm:hasFemaleIllustrator ?femaleIllustrator__id . }
+      graph <http://master-data> { ?femaleIllustrator__id skos:prefLabel ?femaleIllustrator__prefLabel . }
+      FILTER(LANG(?femaleIllustrator__prefLabel) = 'en')
+    }
+
+    #
+    # female editor
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { ?id btm:hasFemaleEditor ?femaleEditor__id . }
+      graph <http://master-data> { ?femaleEditor__id skos:prefLabel ?femaleEditor__prefLabel . }
+      FILTER(LANG(?femaleEditor__prefLabel) = 'en')
+    }
+
+    #
     # KBR identifier
     #
     UNION

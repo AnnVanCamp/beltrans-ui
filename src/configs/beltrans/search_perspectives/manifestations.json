@@ -189,6 +189,42 @@
             "minWidth": 50
         },
         {
+            "id": "femaleAuthor",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10
+        },
+        {
+            "id": "femaleTranslator",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10
+        },
+        {
+            "id": "femaleIllustrator",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10
+        },
+        {
+            "id": "femaleEditor",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10
+        },
+        {
             "id": "kbrIdentifier",
             "valueType": "object",
             "makeLink": true,
@@ -343,7 +379,62 @@
           "sortBy": "instanceCount",
           "sortDirection": "desc",
           "pieChartButton": true
+        },
+        "femaleAuthor": {
+          "containerClass": "four",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "skos:prefLabel",
+          "facetLabelFilter": "FILTER(LANG(?prefLabel_) = 'en')",
+          "predicate": "btm:hasFemaleAuthor",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "btm:hasFemaleAuthor/skos:prefLabel",
+          "sortDirection": "desc",
+          "pieChartButton": true
+        },
+        "femaleTranslator": {
+          "containerClass": "four",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "skos:prefLabel",
+          "facetLabelFilter": "FILTER(LANG(?prefLabel_) = 'en')",
+          "predicate": "btm:hasFemaleTranslator",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "btm:hasFemaleTranslator/skos:prefLabel",
+          "sortDirection": "desc",
+          "pieChartButton": true
+        },
+        "femaleIllustrator": {
+          "containerClass": "four",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "skos:prefLabel",
+          "facetLabelFilter": "FILTER(LANG(?prefLabel_) = 'en')",
+          "predicate": "btm:hasFemaleIllustrator",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "btm:hasFemaleIllustrator/skos:prefLabel",
+          "sortDirection": "desc",
+          "pieChartButton": true
+        },
+        "femaleEditor": {
+          "containerClass": "four",
+          "facetType": "list",
+          "filterType": "uriFilter",
+          "facetLabelPredicate": "skos:prefLabel",
+          "facetLabelFilter": "FILTER(LANG(?prefLabel_) = 'en')",
+          "predicate": "btm:hasFemaleEditor",
+          "searchField": true,
+          "sortButton": true,
+          "sortBy": "instanceCount",
+          "sortByPredicate": "btm:hasFemaleEditor/skos:prefLabel",
+          "sortDirection": "desc",
+          "pieChartButton": true
         }
-
     }
 }

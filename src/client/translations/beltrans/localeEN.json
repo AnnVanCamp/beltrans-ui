@@ -378,6 +378,20 @@
           "label": "genre",
           "description": "The genre of the manifestation according to the Belgian Bibliography."
         },
+        "femaleAuthor": {
+          "label": "Female Author",
+          "description": "At least one of the authors is female (based on the MARC relator codes 'aut' and 'sce')."
+        },
+        "femaleTranslator": {
+          "label": "Female Translator",
+          "description": "At least one of the translators is female (based on the MARC relator codes 'trl' and 'adp')."
+        },                                                                                                                                                     "femaleIllustrator": {
+          "label": "Female illustrator",
+          "description": "At least one of the editors is female (based on the MARC relator code 'ill')."
+        },                                                                                                                                                     "femaleEditor": {
+          "label": "Female editor",
+          "description": "At least one of the editors is female (based on the MARC relator code 'pbd')."
+        },
         "kbrIdentifier": {
           "label": "Provenance KBR",
           "description": "Information from this record of the Royal Library of Belgium (KBR) was used to curate this record."
