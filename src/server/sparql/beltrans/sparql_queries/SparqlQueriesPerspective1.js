@@ -35,8 +35,8 @@ export const manifestationProperties = `
     #
     UNION
     {
-      graph <http://beltrans-manifestations> { ?id schema:inLanguage ?targetLang__id . }
-      graph <http://master-data> { ?targetLang__id mads:authoritativeLabel ?targetLang__prefLabel . }
+      graph <http://beltrans-manifestations> { ?id btm:inLanguage ?targetLang__id . }
+      graph <http://master-data> { ?targetLang__id skos:prefLabel ?targetLang__prefLabel . }
       FILTER(LANG(?targetLang__prefLabel) = 'en')
     }
     #

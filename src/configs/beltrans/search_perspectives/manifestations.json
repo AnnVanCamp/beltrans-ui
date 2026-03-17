@@ -105,7 +105,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 10
+            "minWidth": 20
         },
         {
             "id": "targetLang",
@@ -114,7 +114,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 10
+            "minWidth": 20
         },
         {
             "id": "isbn13",
@@ -238,13 +238,13 @@
           "containerClass": "four",
           "facetType": "list",
           "filterType": "uriFilter",
-          "facetLabelPredicate": "mads:authoritativeLabel",
+          "facetLabelPredicate": "skos:prefLabel",
           "facetLabelFilter": "FILTER(LANG(?prefLabel_) = 'en')",
-          "predicate": "schema:inLanguage",
+          "predicate": "btm:inLanguage",
           "searchField": true,
           "sortButton": true,
           "sortBy": "instanceCount",
-          "sortByPredicate": "schema:inLanguage/mads:authoritativeLabel",
+          "sortByPredicate": "btm:inLanguage/skos:prefLabel",
           "sortDirection": "desc"
         },
         "author": {

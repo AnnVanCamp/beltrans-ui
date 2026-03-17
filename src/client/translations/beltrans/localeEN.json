@@ -335,12 +335,12 @@
           "description": "The date the manifestation was published"
         },
         "sourceLang": {
-          "label": "source language",
-          "description": "The language of the original"
+          "label": "Language(s) source",
+          "description": "The language of the original: the source language"
         },
         "targetLang": {
-          "label": "target language",
-          "description": "The language of the translation"
+          "label": "Language(s) translation",
+          "description": "The language of the translation: the target language"
         },
         "isbn13": {
           "label": "ISBN-13",
