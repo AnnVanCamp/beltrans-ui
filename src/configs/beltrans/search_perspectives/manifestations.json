@@ -187,8 +187,47 @@
             "sortValues": true,
             "numberedList": false,
             "minWidth": 50
+        },
+        {
+            "id": "kbrIdentifier",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "bnfIdentifier",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "kbIdentifier",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "unescoIdentifier",
+            "valueType": "string",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 10,
+            "onlyOnInstancePage": true
         }
-
         
     ],
     "facets": {

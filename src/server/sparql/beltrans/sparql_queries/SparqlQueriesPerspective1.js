@@ -159,6 +159,71 @@ export const manifestationProperties = `
       graph <http://master-data> { ?genre__id skos:prefLabel ?genre__prefLabel . }
       FILTER(LANG(?genre__prefLabel) = 'en')
     }
+
+    #
+    # KBR identifier
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { 
+        ?id bf:identifiedBy ?kbrIDEntity .
+
+        ?kbrIDEntity a bf:Identifier ;
+                     rdfs:label "KBR" ;
+                     rdf:value ?kbrIdentifier__prefLabel .
+      }
+
+      BIND(CONCAT("https://uurl.kbr.be/bib/", ?kbrIdentifier__prefLabel) AS ?kbrIdentifier__dataProviderUrl)
+    }
+
+    #
+    # BnF identifier
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { 
+        ?id bf:identifiedBy ?bnfIDEntity .
+
+        ?bnfIDEntity a bf:Identifier ;
+                     rdfs:label "BnF" ;
+                     rdf:value ?bnfIdentifier__prefLabel .
+      }
+
+      BIND(CONCAT("https://catalogue.bnf.fr/de/ark:/12148/", ?bnfIdentifier__prefLabel) AS ?bnfIdentifier__dataProviderUrl)
+    }
+
+    #
+    # KB identifier
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { 
+        ?id bf:identifiedBy ?kbIDEntity .
+
+        ?kbIDEntity a bf:Identifier ;
+                     rdfs:label "KB" ;
+                     rdf:value ?kbIdentifier__prefLabel .
+      }
+
+      BIND(CONCAT("https://data.bibliotheken.nl/id/nbt/", ?kbIdentifier__prefLabel) AS ?kbIdentifier__dataProviderUrl)
+    }
+
+    #
+    # Unesco identifier
+    #
+    UNION
+    {
+      graph <http://beltrans-manifestations> { 
+        ?id bf:identifiedBy ?unescoIDEntity .
+
+        ?unescoIDEntity a bf:Identifier ;
+                     rdfs:label "Unesco" ;
+                     rdf:value ?unescoIdentifier .
+      }
+
+    }
+
+
     
 `
 

@@ -377,7 +377,25 @@
         "genre": {
           "label": "genre",
           "description": "The genre of the manifestation according to the Belgian Bibliography."
+        },
+        "kbrIdentifier": {
+          "label": "Provenance KBR",
+          "description": "Information from this record of the Royal Library of Belgium (KBR) was used to curate this record."
+        },
+        "bnfIdentifier": {
+          "label": "Provenance BnF",
+          "description": "Information from this record of the National Library of France (BnF) was used to curate this record."
+        },
+        "kbIdentifier": {
+          "label": "Provenance KB",
+          "description": "Information from this record of the Royal Library of the Netherlands (KB) was used to curate this record."
+        },
+        "unescoIdentifier": {
+          "label": "Provenance Unesco",
+          "description": "Information from the online database Unesco Index Translationum was used to curate this record. This database does not contain identifiers, hence we cannot link to the record."
         }
+
+
       }
     },
     "originals": {
