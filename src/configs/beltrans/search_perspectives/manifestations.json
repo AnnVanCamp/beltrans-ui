@@ -61,7 +61,8 @@
             "facetClass": "manifestations",
             "resultMapper": "mapPlaces",
             "instanceConfig": {
-                "propertiesQueryBlock": "manifestationProperties"
+                "propertiesQueryBlock": "manifestationProperties",
+                "createPopUpContent": "createPopUpContentDefault"
             }
         },
         "export": {
@@ -76,6 +77,15 @@
             "sparqlQuery": "knowledgeGraphMetadataQuery",
             "resultMapper": "makeObjectList"
         }
+    },
+    "maps": {
+      "targetPublicationPlace": {
+        "center": [
+          50.85045,
+          4.34878
+        ],
+        "zoom": 5
+      }
     },
     "properties": [
         {
