@@ -4,6 +4,9 @@ import intl from 'react-intl-universal'
 import moment from 'moment'
 
 export const createPopUpContentDefault = ({ data, resultClass }) => {
+  console.log('DATA IS:')
+  console.log(data)
+  console.log(resultClass)
   if (Array.isArray(data.prefLabel)) {
     data.prefLabel = data.prefLabel[0]
   }
@@ -25,6 +28,10 @@ export const createPopUpContentDefault = ({ data, resultClass }) => {
     h3.textContent = data.prefLabel.prefLabel
   }
   container.appendChild(h3)
+  console.log('CONTAINER')
+  console.log(container)
+  console.log('H3 CHILD')
+  console.log(h3)
   return container
 }
 

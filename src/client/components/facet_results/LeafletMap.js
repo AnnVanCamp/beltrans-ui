@@ -201,9 +201,23 @@ class LeafletMap extends React.Component {
     }
 
     // check if should open a popup
+    console.log("this.props.instance")
+    console.log(this.props.instance)
+    console.log("this.state.popupOpen")
+    console.log(this.state.popupOpen)
+    console.log("this.state.popupBinded")
+    console.log(this.state.popupBinded)
+    console.log("this.props.instance.id")
+    if(this.props.instance) { 
+      console.log(`props.instance.id (${this.props.instance.id}) should be ${this.state.popupID}`)
+    }
+
     if (this.props.instance && this.state.popupOpen && !this.state.popupBinded &&
       this.props.instance.id === this.state.popupID) {
+      console.log("popup will be opened!")
       const marker = this.markers[this.props.instance.id]
+      console.log("MARKER IS")
+      console.log(marker)
       marker
         .bindPopup(
           this.props.createPopUpContent({
@@ -227,6 +241,7 @@ class LeafletMap extends React.Component {
         })
       this.setState({ popupBinded: true })
     }
+    else { console.log("apparently no popup must be opened?!") }
 
     if (this.props.showExternalLayers &&
       (this.props.leafletMapState.updateID !== prevProps.leafletMapState.updateID)) {
@@ -310,8 +325,14 @@ class LeafletMap extends React.Component {
     const { mapboxAccessToken, mapboxStyle } = mapboxConfig
 
     // Base layer(s)
-    const mapboxBaseLayer = L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/${mapboxStyle}/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`, {
-      attribution: '&copy; <a href="https://www.mapbox.com/map-feedback/" target="_blank" rel="noopener">Mapbox</a> &copy; <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong> contributors',
+    //const mapboxBaseLayer = L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/${mapboxStyle}/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`, {
+//      attribution: '&copy; <a href="https://www.mapbox.com/map-feedback/" target="_blank" rel="noopener">Mapbox</a> &copy; <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong> contributors',
+//      tileSize: 512,
+//      zoomOffset: -1
+//    })
+    // 2026-04-20: Sven Lieber: use for free openstreetmap tiles instead of mapbox that requires an account and API key
+    const mapboxBaseLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong> contributors',
       tileSize: 512,
       zoomOffset: -1
     })
