@@ -262,10 +262,27 @@ export const manifestationProperties = `
       }
 
     }
-
-
-    
 `
+
+export const targetPublicationPlaces = `
+  SELECT DISTINCT ?id ?lat ?long ?markerColor
+  (1 as ?instanceCount) # for heatmap
+  WHERE {
+    <FILTER>
+    graph  <http://beltrans-manifestations> {
+      ?id a schema:CreativeWork .
+    }
+
+    graph <http://beltrans-geo> {
+      ?id schema:locationCreated/schema:latitude ?lat ;
+          schema:locationCreated/schema:longitude ?long .
+    }
+
+    BIND("red" as ?markerColor)
+  }
+
+`
+    
 
 export const knowledgeGraphMetadataQuery = `
   SELECT * 

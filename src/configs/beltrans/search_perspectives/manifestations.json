@@ -48,6 +48,22 @@
                 }
             }
         },
+        "targetPublicationPlace": {
+            "tabID": 2,
+            "tabPath": "map",
+            "tabIcon": "AddLocation",
+            "component": "LeafletMap",
+            "showInstanceCountInClusters": true,
+            "showExternalLayers": false,
+            "customMapControl": true,
+            "sparqlQuery": "targetPublicationPlaces",
+            "filterTarget": "id",
+            "facetClass": "manifestations",
+            "resultMapper": "mapPlaces",
+            "instanceConfig": {
+                "propertiesQueryBlock": "manifestationProperties"
+            }
+        },
         "export": {
             "tabID": 8,
             "component": "Export",
