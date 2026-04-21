@@ -201,23 +201,11 @@ class LeafletMap extends React.Component {
     }
 
     // check if should open a popup
-    console.log("this.props.instance")
-    console.log(this.props.instance)
-    console.log("this.state.popupOpen")
-    console.log(this.state.popupOpen)
-    console.log("this.state.popupBinded")
-    console.log(this.state.popupBinded)
-    console.log("this.props.instance.id")
-    if(this.props.instance) { 
-      console.log(`props.instance.id (${this.props.instance.id}) should be ${this.state.popupID}`)
-    }
-
-    if (this.props.instance && this.state.popupOpen && !this.state.popupBinded &&
+    if( this.props.instance &&  this.state.popupOpen && !this.state.popupBinded &&
       this.props.instance.id === this.state.popupID) {
-      console.log("popup will be opened!")
-      const marker = this.markers[this.props.instance.id]
-      console.log("MARKER IS")
-      console.log(marker)
+      //const marker = this.markers[this.props.instance.id]
+      const marker = this.state.popupMarker
+      
       marker
         .bindPopup(
           this.props.createPopUpContent({
@@ -241,7 +229,6 @@ class LeafletMap extends React.Component {
         })
       this.setState({ popupBinded: true })
     }
-    else { console.log("apparently no popup must be opened?!") }
 
     if (this.props.showExternalLayers &&
       (this.props.leafletMapState.updateID !== prevProps.leafletMapState.updateID)) {
@@ -1026,7 +1013,9 @@ class LeafletMap extends React.Component {
 
   markerOnClickFacetResults = event => {
     const { id } = event.target.options
+    const marker = event.target
     this.setState({
+      popupMarker: marker,
       popupID: id,
       popupOpen: true
     })
