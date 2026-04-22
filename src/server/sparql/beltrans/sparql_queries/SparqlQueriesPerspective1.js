@@ -282,6 +282,47 @@ export const targetPublicationPlaces = `
   }
 
 `
+
+export const sourceTargetMap = `
+  SELECT DISTINCT ?id
+  ?from__id ?from__prefLabel ?from__lat ?from__long ?from__dataProviderUrl
+  ?to__id ?to__prefLabel (SAMPLE(?tolat) AS ?to__lat) (SAMPLE(?tolong) AS ?to__long) ?to__dataProviderUrl
+  (COUNT(DISTINCT ?translation) AS ?instanceCount)
+  WHERE {
+
+    <FILTER>
+    graph <http://beltrans-manifestations> {
+      ?translation a schema:CreativeWork ;
+                   schema:translationOfWork ?original .
+    }
+
+    graph <http://beltrans-geo> { 
+      ?translation schema:locationCreated ?to__id .
+
+      ?to__id rdfs:label ?to__prefLabel ;
+                schema:longitude ?to__long ;
+                schema:latitude ?to__lat .
+    }
+    BIND(CONCAT("/place/page/", STRAFTER(STR(?to__id), "_")) AS ?to__dataProviderUrl)
+
+    graph <http://beltrans-geo> { 
+      ?original schema:locationCreated ?from__id .
+
+      ?from__id rdfs:label ?from__prefLabel ;
+                schema:longitude ?from__long ;
+                schema:latitude ?from__lat .
+    }
+    BIND(CONCAT("/place/page/", STRAFTER(STR(?from__id), "_")) AS ?from__dataProviderUrl)
+
+    BIND(IRI(CONCAT(STR(?from__id), "-", REPLACE(STR(?to__id), "http://ldf.fi/mmm/place/", ""))) as ?id)
+    FILTER(?from__id != ?to__id)
+
+  }
+  GROUP BY ?id
+  ?from__id ?from__prefLabel ?from__lat ?from__long ?from__dataProviderUrl
+  ?to__id ?to__prefLabel ?to__lat ?to__long ?to__dataProviderUrl
+  ORDER BY desc(?instanceCount)
+`
     
 
 export const knowledgeGraphMetadataQuery = `

@@ -77,11 +77,11 @@
   },
   "tabs": {
     "table": "table",
-    "map": "map",
+    "map": "Publication Place",
     "production_places": "production places",
     "production_places_heatmap": "production heatmap",
     "last_known_locations": "last known locations",
-    "migrations": "migrations",
+    "sourceTargetMap": "Source-Target Map",
     "network": "network",
     "export": "export",
     "production_dates": "production dates",

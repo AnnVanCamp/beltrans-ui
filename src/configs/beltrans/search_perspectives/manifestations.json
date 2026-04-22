@@ -65,6 +65,29 @@
                 "createPopUpContent": "createPopUpContentDefault"
             }
         },
+        "sourceTargetMap": {
+            "tabID": 3,
+            "component": "Deck",
+            "tabPath": "sourceTargetMap",
+            "tabIcon": "Redo",
+            "sparqlQuery": "sourceTargetMap",
+            "facetClass": "manifestations",
+            "filterTarget": "id",
+            "resultMapper": "makeObjectList",
+            "layerType": "arcLayer",
+            "arcWidthVariable": "instanceCountScaled",
+            "instanceVariable": "translation",
+            "showTooltips": false,
+            "postprocess": {
+                "func": "linearScale",
+                "config": {
+                    "variable": "instanceCount",
+                    "minAllowed": 2,
+                    "maxAllowed": 20
+                }
+            }
+
+        },
         "export": {
             "tabID": 8,
             "component": "Export",
@@ -85,7 +108,15 @@
           4.34878
         ],
         "zoom": 5
+      },
+      "sourceTargetMap": {
+        "center": [
+          50.85045,
+          4.34878
+        ],
+        "zoom": 4
       }
+
     },
     "properties": [
         {
