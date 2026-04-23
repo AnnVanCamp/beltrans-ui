@@ -323,7 +323,7 @@
       "properties": {
         "uri": {
           "label": "URI",
-          "description": "Uniform Resource Identifier"
+          "description": "Uniform Resource Identifier test"
         },
         "prefLabel": {
           "label": "Title",
